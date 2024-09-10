@@ -17,9 +17,9 @@ app.use('/abracadabra/juego/:usuario', (req, res, next) => {
     const usuarioExiste = arregloUsuarios.usuarios.find((usuarioTemporal) => {
         return usuarioTemporal == usuario;
     });
-    if(usuarioExiste){
+    if (usuarioExiste) {
         next();
-    }else{
+    } else {
         res.sendFile(__dirname + '/public/template/who.html');
     }
 });
@@ -28,6 +28,14 @@ app.get('/abracadabra/usuarios', (req, res) => {
     res.json(arregloUsuarios);
 });
 
-
+app.get('/abracadabra/conejo/:n', (req, res) => {
+    const sombrero = req.params.n;
+    const aleatorio = Math.floor(Math.random() * (4 - 1 + 1) + 1);
+    if (sombrero == aleatorio) {
+        res.sendFile(__dirname + '/public/template/conejo.html');
+        return;
+    }
+    res.sendFile(__dirname + '/public/template/voldemort.html');
+});
 
 app.listen(3000);
